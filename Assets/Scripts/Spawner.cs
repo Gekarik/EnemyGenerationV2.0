@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private Transform _enemy; 
-    [SerializeField] private Transform _targetPosition; 
-    [SerializeField] private Transform[] _route;
-    [SerializeField] private float _delay = 2.0f;
+    [SerializeField] private EnemyMover _enemy;
+    [SerializeField] private TargetMover _target;
+    [SerializeField] private float _delay = 5.0f;
 
     private void Start()
     {
@@ -21,9 +20,8 @@ public class Spawner : MonoBehaviour
         {
             yield return wait;
             
-            Transform enemy = Instantiate(_enemy, transform.position, Quaternion.identity);
-
-            enemy.GetComponent<Mover>().SetRoute(_route, _targetPosition);
+            EnemyMover enemy = Instantiate(_enemy, transform.position, Quaternion.identity);
+            enemy.SetTarget(_target);
         }
     }
 }
